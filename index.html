@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+
+
+    <title>Coding Trivia</title>
+</head>
+<body>
+    <!-- Instructions = Start Trivia -->
+    <section id="intro">
+        <div>
+            <h1>Coding Trivia</h1>
+        </div>
+
+        <div>
+            <h2>Instructions</h2>
+            <p>This Trivia has 10 coding-related questions. But wait!! It gets more interesting... </p>
+            <ul>
+                <li>You have 1 min 40 secs to finish the test </li>
+                <li>Each time you get a wrong answer 10 seconds are substarcted from remaining time</li>
+            </ul>
+            <p>I hope you enjoy the Trivia. Good Luck!!</p>
+        </div>
+
+        <div>
+            <div id="tryTrivia" class="button">I want to try!</div>
+            <div id="intro_2">
+                <p>Before starting, please enter your initials</p>
+                <input type="text" name="" id="initials">
+                <div id="startTrivia"class="button" >Start Trivia</div>
+            </div>
+        </div>
+
+
+    </section>  
+
+
+    <!-- Questions Section -->
+    <section id="questions">
+        <!-- Question + Timer -->
+        <div class="timer">
+            <P><span id="timeLeft"></span> seconds remaining!</P>
+        </div>
+        <div>
+            <h3 class="question">This is the Question</h3>
+        </div>
+        <!-- Script to insert options in random order -->
+        <div>
+            <ol id="answerList">
+            </ol>
+        </div>
+
+        <div>
+            <p id="rightOrWrong">Right or Wrong</p>
+        </div>
+
+
+    </section>
+
+    <!-- Results + Ranking -->
+    <section id="results">
+        <div>
+            <h2>Trivia Finished</h2>
+            <p>Cheering the user </p>
+            <p>You got a score of <span>xxx</span> points!!</p>
+            <p>Thank you for playing!</p>
+        </div>
+
+        <div>
+            <h2>Coding Trivia Ranking</h2>
+            <div>
+                <ol>
+                    <li>winner</li>
+                    <li>winner</li>
+                </ol>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/questions.js"></script>
+
+</body>
+</html>
