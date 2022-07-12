@@ -73,3 +73,7 @@ section {
     border: solid 5px rgb(76, 110, 25);
     cursor: pointer;
 }
+
+#resultsTable {
+    margin: auto;
+}

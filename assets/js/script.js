@@ -16,6 +16,8 @@ var rightOrWrong = document.querySelector('#rightOrWrong');
 
 
 var results = document.querySelector("#results");
+var resultsTable = document.querySelector("#resultsTable");
+
 
 
 // Text that contains the initials of the user
@@ -24,9 +26,12 @@ var initialsText
 var questionNumber;
 var answers = ['rightAnswer', 'altAnswer1', 'altAnswer2', 'altAnswer3'];
 var answerResult;
-var totalPoints;
+var totalPoints = 0;
+var topScores;
 
 var secondsLeft = 80;
+
+
 
 
 
@@ -41,34 +46,38 @@ rightOrWrong.hidden = true;
 
 tryTrivia.addEventListener("click", tryTriviaFunc);
 startTrivia.addEventListener("click", startTriviaFunc);
-answerList.addEventListener("click", function(evento) {
-    var selection = evento.target;
-
-    // The matches() method returns true if an element matches a specific CSS selector(s).
-    // The matches() method returns false if not.
-
-    if (selection.matches(".answerElement")) {
-        var answerResult = selection.getAttribute("data-result");
-        console.log(answerResult);
-      
-    }
-
-});
-
 
 answerList.addEventListener("click", function(evento) {
     var selection = evento.target;
 
     // The matches() method returns true if an element matches a specific CSS selector(s).
     // The matches() method returns false if not.
+    
 
     if (selection.matches(".answerElement")) {
         var answerResult = selection.getAttribute("data-result");
-        console.log(answerResult);
-      
+        console.log(answerResult); 
     }
 
+    if (answerResult == 'r') {
+        rightOrWrong.innerHTML = "Your answer is correct!"
+        totalPoints = totalPoints + 5;
+        console.log(totalPoints);
+    } else {
+        rightOrWrong.innerHTML = "Sorry, this answer is not the correct one!"
+        
+        if (secondsLeft<=10) {secondsLeft = 0;} 
+        else {secondsLeft = secondsLeft -10;}
+    }
+
+    rightOrWrong.hidden = false;
+
+    answerTimer();
+
+
 });
+
+
 
 
 
@@ -82,7 +91,7 @@ function tryTriviaFunc (event) {
 }
 
 
-//---------- MAIN FUNCTION ----------//
+// Starts the Question Cycle
 
 function startTriviaFunc (event) {
 
@@ -97,51 +106,15 @@ function startTriviaFunc (event) {
     questions.hidden = false;
 
 
-
-    // Main Flow Control
     questionNumber = 1;
 
 
     setTimer();
 
-    
-
-    while (questionNumber <= 10) {
-
-        createAnswerOptions();
-
-        // Waints until user chooses an answwer
-        waitForButtonClick();
-
-        
-        if (answerResult == "r") {
-            rightOrWrong.innerHTML = "Your Answer is Correct!";
-            totalPoints = totalPoints +10; 
-
-        } else {
-            rightOrWrong.innerHTML = "Sorry, this is NOT the right Answer!";
-            secondsLeft = secondsLeft - 10;
-        }
-        
-
-        questionNumber++;
-
-    }
-
+    createAnswerOptions();
+ 
 
 }
-
-
-
-function getUserSelection(item, event) {
-    return new Promise((resolve) => {
-      const listener = () => {
-        item.removeEventListener(event, listener);
-        resolve();
-      }
-      item.addEventListener(event, listener);
-    })
-  }
 
 
 
@@ -199,7 +172,7 @@ function createAnswerOptions() {
 function setTimer() {
     var timerInterval = setInterval(function() {
         secondsLeft--;
-        mins = Math.round(secondsLeft/60);
+        mins = Math.floor(secondsLeft/60);
         secs = Math.round(secondsLeft%60);
 
 
@@ -210,9 +183,9 @@ function setTimer() {
         }
 
 
-
         if (secondsLeft <= 0) {
             clearInterval(timerInterval);
+            showResults();
         }
 
 
@@ -220,6 +193,80 @@ function setTimer() {
 
 }
 
-async function waitForButtonClick() {
-    await getUserSelection(answerList, "click")
+function answerTimer() {
+    var answerSecondsLeft = 1;
+
+    var answerTimerInterval = setInterval(function() {
+        answerSecondsLeft--;
+
+        console.log(answerSecondsLeft);
+        
+        if (answerSecondsLeft == 0) {
+            clearInterval(answerTimerInterval);
+            rightOrWrong.hidden = true;
+
+            if (questionNumber<10) {
+                questionNumber++;
+                createAnswerOptions();
+            } else {
+                showResults();
+            }
+
+
+
+        }
+
+    }, 1000);    
+
+}
+
+
+function showResults() {
+
+    questions.hidden = true;
+    results.hidden = false;
+
+    document.querySelector('#viewPoints').innerHTML = totalPoints;
+
+    ranking();
+    
+}
+
+
+function ranking() {
+
+    resultsTable.innerHTML = "";
+
+    topScores = JSON.parse(localStorage.getItem("topScores"));
+
+    if (topScores == null) {topScores = []}
+
+    if (topScores.length < 5) {tempArray = topScores} else {
+        var tempArray = topScores.filter(record=>{return record.points>totalPoints});
+    }
+    
+    if (tempArray.length < 5 ) {
+
+        var newWinnwer =  {
+            user: initialsText,
+            points: totalPoints
+        }
+        
+        tempArray.push(newWinnwer);
+
+        topScores = tempArray.sort(function(a,b){return  b.points -  a.points});
+
+        localStorage.setItem('topScores', JSON.stringify(topScores));
+    }
+
+
+    for (let index = 0; index < topScores.length; index++) {
+        
+        
+        var rankElement = document.createElement('tr');
+        rankElement.innerHTML += ('<td>' + topScores[index].user + '</td>');
+        rankElement.innerHTML += ('<td>' + topScores[index].points+ '</td>');
+        resultsTable.appendChild(rankElement);    
+        
+    }
 }
