@@ -22,7 +22,9 @@ var resultsTable = document.querySelector("#resultsTable");
 
 
 // Text that contains the initials of the user
-var initialsText
+var initialsText;
+
+var timerInterval;
 
 var questionNumber;
 var answers = ['rightAnswer', 'altAnswer1', 'altAnswer2', 'altAnswer3'];
@@ -197,7 +199,7 @@ function createAnswerOptions() {
 
 
 function setTimer() {
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         secondsLeft--;
         mins = Math.floor(secondsLeft/60);
         secs = Math.round(secondsLeft%60);
@@ -237,6 +239,7 @@ function answerTimer() {
                 createAnswerOptions();
             } else {
                 clearInterval(answerTimerInterval);
+                clearInterval(timerInterval);
                 timpePoints = secondsLeft;
                 showResults();
             }
