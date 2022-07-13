@@ -13,6 +13,7 @@ var theQuestion = document.querySelector(".question");
 // Variables to create answer choices
 var answerList = document.querySelector('#answerList');
 var rightOrWrong = document.querySelector('#rightOrWrong');
+var endTrivia = document.querySelector("#endTrivia");
 
 
 var results = document.querySelector("#results");
@@ -29,62 +30,83 @@ var answerResult;
 var totalPoints = 0;
 var topScores;
 
-var secondsLeft = 80;
-
-
+var secondsLeft = 60;
+var timpePoints = 0;
 
 
 
 
 // Define initial visualisation of elements
-tryTrivia.hidden = false;
+tryTrivia.className = "button";
 intro_2.hidden = true;
 questions.hidden = true;
 results.hidden = true;
 rightOrWrong.hidden = true;
 
 
+
+
+// EVENT LISTENERS
+
+
 tryTrivia.addEventListener("click", tryTriviaFunc);
 startTrivia.addEventListener("click", startTriviaFunc);
 
-answerList.addEventListener("click", function(evento) {
-    var selection = evento.target;
+endTrivia.addEventListener("click", function () {
+    location.reload();
+})
+
+document.querySelector('#startAgain').addEventListener("click", function () {
+    location.reload();
+})
+
+
+
+
+answerList.addEventListener("click", function(event) {
+    var selection = event.target;
+    console.log("This is teh event" + event);
 
     // The matches() method returns true if an element matches a specific CSS selector(s).
     // The matches() method returns false if not.
     
 
-    if (selection.matches(".answerElement")) {
-        var answerResult = selection.getAttribute("data-result");
-        console.log(answerResult); 
-    }
-
-    if (answerResult == 'r') {
-        rightOrWrong.innerHTML = "Your answer is correct!"
-        totalPoints = totalPoints + 5;
-        console.log(totalPoints);
-    } else {
-        rightOrWrong.innerHTML = "Sorry, this answer is not the correct one!"
+    if (selection.matches(".answerElement") || selection.matches(".answerText")) {
+        if (selection.matches(".answerElement")) {var answerResult = selection.getAttribute("data-result");}
+        if (selection.matches(".answerText")) {var answerResult = selection.parentElement.getAttribute("data-result")}
         
-        if (secondsLeft<=10) {secondsLeft = 0;} 
-        else {secondsLeft = secondsLeft -10;}
+        // var answerResult = selection.getAttribute("data-result");
+        console.log("Your answer is: " + answerResult); 
+    
+        if (answerResult == 'r') {
+            rightOrWrong.innerHTML = "Your answer is correct!"
+            totalPoints = totalPoints + 5;
+            console.log(totalPoints);
+        } else {
+            rightOrWrong.innerHTML = "Sorry, this answer is NOT the correct one!"
+            
+            if (secondsLeft<=10) {secondsLeft = 0;} 
+            else {secondsLeft = secondsLeft -10;}
+        }
+
+        rightOrWrong.hidden = false;
+
+        answerTimer();
+
     }
-
-    rightOrWrong.hidden = false;
-
-    answerTimer();
-
 
 });
 
 
+// FUNCTIONS
 
 
-
-function tryTriviaFunc (event) {
+function tryTriviaFunc () {
     
-    console.log("Click boton TryTrivia");
-  
+    
+    document.querySelector(".enjoy").hidden = true;
+    tryTrivia.className = "";
+
     tryTrivia.hidden = true;
     intro_2.hidden = false;
 
@@ -95,28 +117,33 @@ function tryTriviaFunc (event) {
 
 function startTriviaFunc (event) {
 
-
     // Saves User Initials
     initialsText = initials.value;
-    console.log(initialsText);
 
-    // Shows sections that are going to be used 
-    intro.hidden = true;
-    intro_2.hidden = true;
-    questions.hidden = false;
+    if (initialsText.length > 3) {
 
+        initialsText = initialsText.slice(0,9);
 
-    questionNumber = 1;
+        console.log(initialsText);
 
+        // Shows sections that are going to be used 
+        intro.hidden = true;
+        intro_2.hidden = true;
+        questions.hidden = false;
 
-    setTimer();
+        questionNumber = 1;
 
-    createAnswerOptions();
- 
+        setTimer();
+
+        createAnswerOptions();
+
+    } else {
+
+        alert("The Nickname must have between 4 and 8 characters");
+
+    }
 
 }
-
-
 
 
 
@@ -162,7 +189,7 @@ function createAnswerOptions() {
             answerElement.setAttribute('data-result','w');
         }
 
-        answerElement.innerHTML = questionsDB[questionNumber][answerOption];
+        answerElement.innerHTML = ('<p class="answerText">' + questionsDB[questionNumber][answerOption] + "</p>");
         answerList.appendChild(answerElement);
     }
     
@@ -209,14 +236,13 @@ function answerTimer() {
                 questionNumber++;
                 createAnswerOptions();
             } else {
+                clearInterval(answerTimerInterval);
+                timpePoints = secondsLeft;
                 showResults();
             }
-
-
-
         }
 
-    }, 1000);    
+    }, 500);    
 
 }
 
@@ -226,6 +252,9 @@ function showResults() {
     questions.hidden = true;
     results.hidden = false;
 
+    totalPoints =  totalPoints + timpePoints;
+
+    document.querySelector('.cheering').innerHTML = initialsText + ", Thank you for playing!!!!";
     document.querySelector('#viewPoints').innerHTML = totalPoints;
 
     ranking();
@@ -235,38 +264,35 @@ function showResults() {
 
 function ranking() {
 
-    resultsTable.innerHTML = "";
+    resultsTable.innerHTML = "<td>Rank</td><td>NickName</td><td>points</td></th>";
 
     topScores = JSON.parse(localStorage.getItem("topScores"));
-
     if (topScores == null) {topScores = []}
 
-    if (topScores.length < 5) {tempArray = topScores} else {
-        var tempArray = topScores.filter(record=>{return record.points>totalPoints});
+
+    var newWinnwer =  {
+        user: initialsText,
+        points: totalPoints
     }
+
+    topScores.push(newWinnwer);
+    topScores = topScores.sort(function(a,b){return  b.points -  a.points}).slice(0,5);
     
-    if (tempArray.length < 5 ) {
 
-        var newWinnwer =  {
-            user: initialsText,
-            points: totalPoints
-        }
-        
-        tempArray.push(newWinnwer);
-
-        topScores = tempArray.sort(function(a,b){return  b.points -  a.points});
-
-        localStorage.setItem('topScores', JSON.stringify(topScores));
-    }
-
+    localStorage.setItem('topScores', JSON.stringify(topScores));
+    
 
     for (let index = 0; index < topScores.length; index++) {
         
-        
         var rankElement = document.createElement('tr');
+        // rankElement.innerHTML += ('<td>Rank</td><td>NickName</td><td>points</td></th>');
+        rankElement.innerHTML += ('<td>' + (eval(index) + 1) + '</td>');
         rankElement.innerHTML += ('<td>' + topScores[index].user + '</td>');
         rankElement.innerHTML += ('<td>' + topScores[index].points+ '</td>');
         resultsTable.appendChild(rankElement);    
         
     }
 }
+
+
+

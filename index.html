@@ -24,13 +24,16 @@
                 <li>You have 1 min 40 secs to finish the test </li>
                 <li>Each time you get a wrong answer 10 seconds are substarcted from remaining time</li>
             </ul>
-            <p>I hope you enjoy the Trivia. Good Luck!!</p>
+            <p class="enjoy">I hope you enjoy the Trivia. Good Luck!!</p>
         </div>
 
         <div>
-            <div id="tryTrivia" class="button">I want to try!</div>
+            <!-- <div id="tryTrivia" class="button" hidden><p>I want to try!</p></div> -->
+
+            <div id="tryTrivia" class="button"><p>I want to try!</p></div>
+
             <div id="intro_2">
-                <p>Before starting, please enter your initials</p>
+                <p>Before starting, please enter a Nickname (It must be 4 to 8 characters long)</p>
                 <input type="text" name="" id="initials">
                 <div id="startTrivia"class="button" >Start Trivia</div>
             </div>
@@ -44,21 +47,23 @@
     <section id="questions">
         <!-- Question + Timer -->
         <div class="timer">
-            <P><span id="timeLeft"></span> seconds remaining!</P>
+            <P> Time  remaining:<span id="timeLeft"></span></P>
         </div>
+
         <div>
             <h3 class="question">This is the Question</h3>
         </div>
+
         <!-- Script to insert options in random order -->
         <div>
-            <ol id="answerList">
-            </ol>
+            <ol id="answerList"></ol>
         </div>
 
         <div>
             <p id="rightOrWrong"></p>
         </div>
 
+        <div id="endTrivia" class="endTrivia"><p>End Trivia</p></div>
 
     </section>
 
@@ -66,18 +71,20 @@
     <section id="results">
         <div>
             <h2>Trivia Finished</h2>
-            <p>Cheering the user </p>
+            <p class="cheering"></p>
             <p>You got a score of <span id="viewPoints">xxx</span> points!!</p>
             <p>Thank you for playing!</p>
         </div>
 
         <div>
             <h2>Coding Trivia Ranking</h2>
-            <div>
+            <div class="resultsDiv">
                 <table id="resultsTable">
-
+                    <th>
+                    </th>
                 </table>
 
+                <div id="startAgain" class="endTrivia"><p>Start Again</p></div>
             </div>
 
         </div>

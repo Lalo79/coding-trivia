@@ -1,3 +1,19 @@
+:root {
+    --buttonBckg: #13749E;
+    --buttonBckgFocus: #4791B1;
+    --buttonBorder: #012839;
+
+
+    --questBckg: #14AD36;
+    --questkgFocus: #00781A;
+    --questBorder: #00390D;
+
+    --endBckg: #E42E1B;
+    --endkgFocus: #9F0F00;
+    --endBorder: #4B0700;
+}
+
+
 * {
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -21,22 +37,36 @@ section {
     border-top: solid 2px rgb(218, 218, 218);
 }
 
+
+#questions {
+    position: relative;
+    height: 600px;
+}
+
+
 .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 45px;
+
     margin: auto;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 5px;
 
     border-radius: 8px;
 
     width: 175px;
-    background-color: rgb(23, 23, 243);
+    background-color: var(--buttonBckg);
     color: white;
 }
 
+
+
 .button:hover {
-    background-color: rgb(65, 65, 253);
-    border: solid 3px rgb(4, 4, 100);
+    background-color: var(--buttonBckgFocus);
+    border: solid 3px var(--buttonBorder);
     cursor: pointer;
     
 
@@ -46,12 +76,27 @@ section {
     text-align: right;   
 }
 
+.timer span {
+    font-size: larger;
+    font-weight: bolder;
+}
+
+
+
+#answerList, .question{
+    margin: 50px;
+}
+
 .answerElement {
 
-    box-sizing: border-box;
 
-    background-color: rgb(177, 233, 93);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--questBckg);
     border-radius: 8px;
+    color: white;
 
     width: 400px;
     height: 47px;
@@ -67,13 +112,88 @@ section {
 }
 
 
+#rightOrWrong {
+    border-top: solid 2px rgb(218, 218, 218);
+    padding-top: 15px;
+    font-size:larger;
+}
+
+
 
 .answerElement:hover {
-    background-color: rgb(157, 230, 47);
-    border: solid 5px rgb(76, 110, 25);
+    background-color: var(--questkgFocus);
+    border: solid 5px var(--questBorder);
     cursor: pointer;
+}
+
+
+.endTrivia {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40PX;
+    margin: auto; 
+
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    width: 200px;
+
+    padding: 8px 0;
+    vertical-align: middle;
+    border-radius: 8px;
+    
+    
+    /* margin-top: 100px; */
+
+    background-color: var(--endBckg);
+    color: white;
+       
+    }
+
+.resultsDiv {
+    position: relative;
+    height: 600px;
+
+}
+
+#viewPoints{
+    font-size: larger;
+    font-weight: bolder;
 }
 
 #resultsTable {
     margin: auto;
+    }
+
+
+#startAgain {
+    position:revert;
+    margin-top: 150px;
 }
+
+
+td {
+    width: 120px;
+    padding: 6px;
+    margin: 5px;
+    text-align: center;
+}
+
+tr:nth-child(odd) {
+    background: #e5eaeb;
+  }
+
+
+
+.endTrivia:hover {
+    
+    background-color: var(--endkgFocus);
+    border: solid 5px var(--endBorder);
+    cursor: pointer;
+}
+
+
+
