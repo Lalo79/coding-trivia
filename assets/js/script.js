@@ -32,7 +32,7 @@ var answerResult;
 var totalPoints = 0;
 var topScores;
 
-var secondsLeft = 60;
+var secondsLeft = 100;
 var timpePoints = 0;
 
 

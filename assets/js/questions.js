@@ -1,83 +1,83 @@
 var questionsDB = {
     '1': {
-        'question': 'This is the Trivia Coding Question 1',
-        'rightAnswer': 'This is the RIGHT ANSWER 1',
-        'altAnswer1': 'Alternative Answer 11',
-        'altAnswer2': 'Alternative Answer 21',
-        'altAnswer3': 'Alternative Answer 31'
+        'question': 'What is cellpadding used for?',
+        'rightAnswer': 'Change the distance between cell and content',
+        'altAnswer1': 'Change the space between elements',
+        'altAnswer2': 'Determine alignment of an element',
+        'altAnswer3': 'Justify the content of an element'
     },
 
     '2': {
-        'question': 'This is the Trivia Coding Question 2',
-        'rightAnswer': 'This is the RIGHT ANSWER 2',
-        'altAnswer1': 'Alternative Answer 12',
-        'altAnswer2': 'Alternative Answer 22',
-        'altAnswer3': 'Alternative Answer 32'
+        'question': 'If you do not include a DESCRIPTION meta tag, the most search engines will simply list what?',
+        'rightAnswer': 'The first few words on the page',
+        'altAnswer1': 'Nothing',
+        'altAnswer2': 'Random line texts',
+        'altAnswer3': 'All text above the fold of your page'
     },
 
     '3': {
-        'question': 'This is the Trivia Coding Question 3',
-        'rightAnswer': 'This is the RIGHT ANSwER 3',
-        'altAnswer1': 'Alternative Answer 13',
-        'altAnswer2': 'Alternative Answer 23',
-        'altAnswer3': 'Alternative Answer 33'
+        'question': 'Choose the correct html to left-align the content inside a table cell',
+        'rightAnswer': 'td align="left"',
+        'altAnswer1': 'td valign="left"',
+        'altAnswer2': 'tdleft',
+        'altAnswer3': 'td leftalign'
     },
 
     '4': {
-        'question': 'This is the Trivia Coding Question 4',
-        'rightAnswer': 'This is the RIGHT ANSWER 4',
-        'altAnswer1': 'Alternative Answer 14',
-        'altAnswer2': 'Alternative Answer 24',
-        'altAnswer3': 'Alternative Answer 34'
+        'question': 'How can you open a link in a new browser window?',
+        'rightAnswer': "&#60a href='url' target='_blank'&#62;",
+        'altAnswer1': "&#60a href='url' new&#62;",
+        'altAnswer2': "&#60a href='url' target='new'&#62;",
+        'altAnswer3': "&#60a href='url' '_blank'&#62;"
     },
 
     '5': {
-        'question': 'This is the Trivia Coding Question 5',
-        'rightAnswer': 'This is the RIGHT ANSWER 5',
-        'altAnswer1': 'Alternative Answer 15',
-        'altAnswer2': 'Alternative Answer 25',
-        'altAnswer3': 'Alternative Answer 35'
+        'question': 'Colspan=n can be added to only what tag',
+        'rightAnswer': "&#60td&#62;",
+        'altAnswer1': "&#60th&#62;",
+        'altAnswer2': "&#60table&#62;",
+        'altAnswer3': "&#60div&#62;"
     },
 
     '6': {
-        'question': 'This is the Trivia Coding Question 6',
-        'rightAnswer': 'This is the RIGHT ANSWER 6',
-        'altAnswer1': 'Alternative Answer 16',
-        'altAnswer2': 'Alternative Answer 26',
-        'altAnswer3': 'Alternative Answer 36'
+        'question': 'It is the process of removing errors found in the program',
+        'rightAnswer': 'Debugging',
+        'altAnswer1': 'Editing',
+        'altAnswer2': 'Compiling',
+        'altAnswer3': 'Running'
     },
 
     '7': {
-        'question': 'This is the Trivia Coding Question 7',
-        'rightAnswer': 'This is the RIGHT ANSWER 7',
-        'altAnswer1': 'Alternative Answer 17',
-        'altAnswer2': 'Alternative Answer 27',
-        'altAnswer3': 'Alternative Answer 37'
+        'question': 'What is Java API',
+        'rightAnswer': 'A collection of ready-made software components in Java.',
+        'altAnswer1': 'An application to display a Java program output.',
+        'altAnswer2': 'It is a Java application used to interface two or more systems.',
+        'altAnswer3': 'Java applet interface'
     },
 
     '8': {
-        'question': 'This is the Trivia Coding Question 8',
-        'rightAnswer': 'This is the RIGHT ANSWER 8',
-        'altAnswer1': 'Alternative Answer 18',
-        'altAnswer2': 'Alternative Answer 28',
-        'altAnswer3': 'Alternative Answer 38'
+        'question': 'Jennie is considering adding a repetition statement within Java. Jennie is unsure of the number of times each loop needs to execute. Which statement best fits the need identified by Jennie?',
+        'rightAnswer': 'While',
+        'altAnswer1': 'For',
+        'altAnswer2': 'If..else',
+        'altAnswer3': 'Switch'
     },
 
     '9': {
-        'question': 'This is the Trivia Coding Question 9',
-        'rightAnswer': 'This is the RIGHT ANSWER 9',
-        'altAnswer1': 'Alternative Answer 19',
-        'altAnswer2': 'Alternative Answer 29',
-        'altAnswer3': 'Alternative Answer 39'
+        'question': 'in the following tag &#60section class="test" id="section2"&#62&#60/section&#62, which jqery command should be used to hide this element',
+        'rightAnswer': "$('.test').hide()",
+        'altAnswer1': "$('#test').hide()",
+        'altAnswer2': "$('p').hide()",
+        'altAnswer3': "$(&#60'section&#62').hide()"
     },
 
 
     '10': {
-        'question': 'This is the Trivia Coding Question 10',
-        'rightAnswer': 'This is the RIGHT ANSWER 10',
-        'altAnswer1': 'Alternative Answer 110',
-        'altAnswer2': 'Alternative Answer 210',
-        'altAnswer3': 'Alternative Answer 310'
+        'question': 'Which Bootstrap - HTML class provides a responsive fixed width container',
+        'rightAnswer': '.container',
+        'altAnswer1': '.container-fluid',
+        'altAnswer2': '.container-fixed',
+        'altAnswer3': '.container-responsive'
     },
 
 
